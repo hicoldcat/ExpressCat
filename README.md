@@ -1,7 +1,7 @@
-ExpressCat -【快递猫】
+ExpressCat -【快递喵】
 ==================
 
->#### 快递猫：查快递的微信小程序 
+>#### 快递喵：查快递的微信小程序 
 
 ------
 
@@ -13,7 +13,7 @@ ExpressCat -【快递猫】
 
 >###　项目地址
 
-[快递猫DEMO](https://github.com/hicoldcat/ExpressCat)
+[快递喵DEMO](https://github.com/hicoldcat/ExpressCat)
 
 >### 查看项目代码
 
@@ -25,7 +25,8 @@ ExpressCat -【快递猫】
 3. 打开项目即可阅读和编辑代码。
 
 >### 小程序二维码
-待添加
+
+![QRCode](https://github.com/hicoldcat/ExpressCat/blob/master/img/gh_e9e6a84e8c88_258.jpg?raw=true)
 
 >### 开发文档 
 
