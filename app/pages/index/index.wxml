@@ -1,10 +1,21 @@
 <!--index.wxml-->
 <view class="container">
-  <view  bindtap="bindViewTap" class="userinfo">
-    <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
-    <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+  <view class="search-box">
+    <view class="head-img">
+      <image src="../../images/logocat.png"></image>
+    </view>
+    <view class="search-input">
+      <input placeholder="请输入快递单号" placeholder-class="placeholderstyle" cursor-spacing="50px"/>
+      <image src="../../images/scanning.png"></image>
+    </view>
+    <view class="search-button">
+      <button>查询</button>
+    </view>
   </view>
-  <view class="usermotto">
-    <text class="user-motto">{{motto}}</text>
+  <view class="explain-line">
+    <view class="explain-block"></view>
+    <view class="explain-text">查询结果</view>
+  </view>
+  <view class="search-result">
   </view>
 </view>
