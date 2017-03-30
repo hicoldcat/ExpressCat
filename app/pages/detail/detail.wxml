@@ -2,19 +2,22 @@
 
     <view class="header">
         <view class="logo">
-            <image src="../../images/logocat.png"></image>
+            <!--<image src="../../images/logocat.png"></image>-->
+            {{detailList.ShipperCode}}
         </view>
         <view class="content">
             <view class="title">
-                <view class="name">{{detailList.ShipperCode}}</view>
-                <view class="order">{{detailList.LogisticCode}}</view>
+                <view class="name">{{expressName}}</view>
+                <view class="order">{{expressOrder}}</view>
             </view>
-            <view class="status">{{detailList.State}}</view>
+            <view class="status" wx:if="{{detailList.State == 4}}"> 问题件 </view>
+            <view class="status" wx:elif="{{detailList.State == 3}}"> 签收 </view>
+            <view class="status" wx:else> 在途 </view>
         </view>
     </view>
 
-    <view class="detail-box">
-        <view class="detail-item" wx:for="{{detailList.Traces}}">
+    <view class="detail-box" >
+        <view wx:for="{{detailList.Traces}}" class="{{index == 0 ? 'detail-item active' : 'detail-item'}}">
             <view class="icon">
                 <image src="../../images/express_icon.png"></image>
             </view>

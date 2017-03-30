@@ -22,6 +22,11 @@ view{
     border-radius: 50%;
     width: 50px;
     height: 50px;
+    text-align: center;
+    line-height: 50px;
+    font-style: oblique;
+    font-weight: 700;
+    background-color: #EF6262;
 }
 
 .logo image {
@@ -37,21 +42,26 @@ view{
 .title{
     display: block;
     width: 100%;
+    line-height: 20px;
+    font-weight: 700;
 }
 
 .name{
     display: inline-block;
-    font-size: 22px;
+    font-size: 1.2rem;
 }
 
 .order{
     display: inline-block;
-    font-size: 18px;
+    font-size: .8rem;
     margin-left: 10px;
 }
 
 .status{
     display: block;
+    font-size: .9rem;
+    line-height: 20px;
+    font-weight: 700;
 }
 
 .detail-box{
@@ -62,6 +72,10 @@ view{
     border-left: 2px solid #4FBDFA;
     margin-left: 40px;
     position: relative;
+}
+
+.active{
+    color: #EF6262;
 }
 
 .icon image{
@@ -91,4 +105,5 @@ view{
     width: 90%;
     padding: 5px 0 10px 0;
     border-bottom: 1px solid #E9E9E9;
+    line-height: 20px;
 }

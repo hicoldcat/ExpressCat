@@ -2,11 +2,21 @@ var Base64 = require('../../utils/base64.js').Base64;
 var MD5 = require('../../utils/md5.min.js');
 Page({
     data: {
-        detailList:{}
+        detailList:{},
+        expressName:"",
+        expressOrder:""
     },
     onLoad: function (options) {
         let data = options;
         this.getExpressDetail(data);
+        this.setData({
+            expressName:data.ShipperName,
+            expressOrder:data.LogisticCode
+        });
+
+        wx.setNavigationBarTitle({
+            title: '物流详情'
+        })
     },
 
     getExpressDetail: function (data) {
