@@ -1,0 +1,28 @@
+<view class="box">
+
+    <view class="header">
+        <view class="logo">
+            <image src="../../images/logocat.png"></image>
+        </view>
+        <view class="content">
+            <view class="title">
+                <view class="name">{{detailList.ShipperCode}}</view>
+                <view class="order">{{detailList.LogisticCode}}</view>
+            </view>
+            <view class="status">{{detailList.State}}</view>
+        </view>
+    </view>
+
+    <view class="detail-box">
+        <view class="detail-item" wx:for="{{detailList.Traces}}">
+            <view class="icon">
+                <image src="../../images/express_icon.png"></image>
+            </view>
+            <view class="right">
+                <view class="time">{{item.AcceptTime}}</view>
+                <view class="info">{{item.AcceptStation}}</view>
+            </view>
+        </view>
+    </view>
+
+</view>

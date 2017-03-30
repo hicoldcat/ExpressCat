@@ -16,7 +16,7 @@
   </view>
   <view class="explain-line">
     <view class="explain-block"></view>
-    <view class="explain-text">查询结果</view>
+    <view class="explain-text">查询历史</view>
   </view>
   <view class="search-result">
   </view>
