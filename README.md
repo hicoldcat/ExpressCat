@@ -11,7 +11,7 @@ ExpressCat -【快递喵】
 
 感谢[http://www.kdniao.com](http://www.kdniao.com)提供的免费API。
 
->###　项目地址
+>### 项目地址
 
 [快递喵DEMO](https://github.com/hicoldcat/ExpressCat)
 
@@ -26,7 +26,7 @@ ExpressCat -【快递喵】
 
 >### 小程序二维码
 
-![QRCode](https://github.com/hicoldcat/ExpressCat/blob/master/img/gh_e9e6a84e8c88_258.jpg?raw=true)
+![QRCode](https://raw.githubusercontent.com/hicoldcat/ExpressCat/master/assest/gh_e9e6a84e8c88_258.jpg)
 
 >### 开发文档 
 
