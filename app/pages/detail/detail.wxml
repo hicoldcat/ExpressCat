@@ -18,8 +18,11 @@
 
     <view class="detail-box" >
         <view wx:for="{{detailList.Traces}}" class="{{index == 0 ? 'detail-item active' : 'detail-item'}}">
-            <view class="icon">
+            <view class="icon" wx:if="{{ index == 0}}">
                 <image src="../../images/express_icon.png"></image>
+            </view>
+            <view class="icon" wx:else>
+                <image src="../../images/express_icon_grey.png"></image>
             </view>
             <view class="right">
                 <view class="time">{{item.AcceptTime}}</view>
