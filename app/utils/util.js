@@ -16,6 +16,11 @@ function formatNumber(n) {
   return n[1] ? n : '0' + n
 }
 
+function trim(str) {
+  return str.replace(/(^\s+)|(\s+$)/g, "");
+}
+
 module.exports = {
-  formatTime: formatTime
+  formatTime: formatTime,
+  trim:trim
 }
