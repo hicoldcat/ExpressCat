@@ -111,17 +111,30 @@
   align-items: center;
 }
 
+.history-detail{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .expressname {
-  display: inline-block;
+  line-height: 50px;
+  height: 50px;
 }
 
 .expressorder {
-  display: inline-block;
   margin-left: 10px;
+  line-height: 50px;
+  height: 50px;
 }
 
 .delhistory{
-  height: 50px;
+  display: inline-flex;
+  height: 51px;
+  line-height: 51px;
+  justify-content: center;
+  align-items: center;
+
 }
 
 .delhistory image{

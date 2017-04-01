@@ -9,16 +9,7 @@ Page({
   },
 
   onShow: function () {
-    var self =this;
-    wx.getStorage({
-      key: 'historySearchList',
-      success: function (res) {
-        self.setData({
-          historySearch:res.data
-        });
-        console.info(res.data)
-      }
-    })
+    this.showHistory();
   },
 
   formSubmit: function (e) {
@@ -95,7 +86,38 @@ Page({
     })
   },
 
-  deleteHistory: function(e){
-    console.info(e.detail.value)
+  deleteHistory: function (e) {
+    var self = this;
+    try {
+      let historySearchList = wx.getStorageSync('historySearchList');
+
+      let newList = historySearchList.filter(function (val) {
+        return (val.order != e.currentTarget.dataset.order);
+      });
+
+      wx.setStorage({
+        key: "historySearchList",
+        data: newList,
+        success: function () {
+          self.showHistory();
+        }
+      })
+    } catch (e) {
+      console.log(e);
+    }
+
+  },
+
+
+  showHistory: function () {
+    var self = this;
+    wx.getStorage({
+      key: 'historySearchList',
+      success: function (res) {
+        self.setData({
+          historySearch: res.data
+        });
+      }
+    })
   }
 })
