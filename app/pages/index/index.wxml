@@ -7,7 +7,7 @@
     <form bindsubmit="formSubmit">
       <view class="search-input">
         <input  focus="{{focus}}" placeholder="请输入快递单号" placeholder-class="placeholderstyle" cursor-spacing="50px" name="expressorder" type="number"/>
-        <image src="../../images/scanning.png"></image>
+        <image src="../../images/scanning.png" bindtap="scanCode"></image>
       </view>
       <view class="search-button">
         <button form-type="submit">查询</button>

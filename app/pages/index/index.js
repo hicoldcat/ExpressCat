@@ -13,7 +13,6 @@ Page({
   },
 
   formSubmit: function (e) {
-    let self = this;
     let eorder = util.trim(e.detail.value.expressorder);
 
     if (!eorder) {
@@ -32,6 +31,69 @@ Page({
       return;
     }
 
+    this.searchExpress(eorder);
+  },
+
+  deleteHistory: function (e) {
+    var self = this;
+    try {
+      let historySearchList = wx.getStorageSync('historySearchList');
+
+      let newList = historySearchList.filter(function (val) {
+        return (val.order != e.currentTarget.dataset.order);
+      });
+
+      wx.setStorage({
+        key: "historySearchList",
+        data: newList,
+        success: function () {
+          self.showHistory();
+        }
+      })
+    } catch (e) {
+      console.log(e);
+    }
+
+  },
+
+  showHistory: function () {
+    var self = this;
+    wx.getStorage({
+      key: 'historySearchList',
+      success: function (res) {
+        self.setData({
+          historySearch: res.data
+        });
+      }
+    })
+  },
+
+  scanCode: function () {
+    let self = this;
+    wx.scanCode({
+      success: (res) => {
+        if (res.result) {
+          self.searchExpress(util.trim(res.result));
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '快递单号不能为空！',
+            showCancel: false,
+            success: function (res) {
+              if (res.confirm) {
+                self.setData({
+                  focus: true
+                })
+              }
+            }
+          })
+        }
+      }
+    })
+  },
+
+  searchExpress: function (eorder) {
+    let self = this;
     let appKey = "518a73d8-1f7f-441a-b644-33e77b49d846";
     let requestData = "{\"LogisticCode\":\"" + eorder + "\"}";
     let eBusinessID = "1237100";
@@ -82,41 +144,6 @@ Page({
         } catch (e) {
           console.log(e);
         }
-      }
-    })
-  },
-
-  deleteHistory: function (e) {
-    var self = this;
-    try {
-      let historySearchList = wx.getStorageSync('historySearchList');
-
-      let newList = historySearchList.filter(function (val) {
-        return (val.order != e.currentTarget.dataset.order);
-      });
-
-      wx.setStorage({
-        key: "historySearchList",
-        data: newList,
-        success: function () {
-          self.showHistory();
-        }
-      })
-    } catch (e) {
-      console.log(e);
-    }
-
-  },
-
-
-  showHistory: function () {
-    var self = this;
-    wx.getStorage({
-      key: 'historySearchList',
-      success: function (res) {
-        self.setData({
-          historySearch: res.data
-        });
       }
     })
   }
