@@ -137,7 +137,7 @@ Page({
             data: newList,
             success: function () {
               wx.navigateTo({
-                url: '../detail/detail?LogisticCode=12345678&ShipperCode=YTO&ShipperName=圆通'
+                url: '../detail/detail?LogisticCode='+LogisticCode+'&ShipperCode=YTO&ShipperName='+ShipperName
               })
             }
           })

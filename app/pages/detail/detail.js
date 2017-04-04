@@ -2,16 +2,16 @@ var Base64 = require('../../utils/base64.js').Base64;
 var MD5 = require('../../utils/md5.min.js');
 Page({
     data: {
-        detailList:{},
-        expressName:"",
-        expressOrder:""
+        detailList: {},
+        expressName: "",
+        expressOrder: ""
     },
     onLoad: function (options) {
         let data = options;
         this.getExpressDetail(data);
         this.setData({
-            expressName:data.ShipperName,
-            expressOrder:data.LogisticCode
+            expressName: data.ShipperName,
+            expressOrder: data.LogisticCode
         });
 
         wx.setNavigationBarTitle({
@@ -78,7 +78,12 @@ Page({
 
 
                 self.setData({
-                    detailList:d
+                    detailList: d
+                })
+
+                wx.setStorage({
+                    key: data.LogisticCode,
+                    data: d.Traces.shift()
                 })
 
 

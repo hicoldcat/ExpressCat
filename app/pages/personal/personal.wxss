@@ -88,6 +88,7 @@
 .detail {
   flex: 0 0 1;
   padding: 0 20rpx;
+  width: 80%;
 }
 
 .express-detail {
@@ -108,7 +109,6 @@
 
 .lastStatus {
   color: #545454;
-  width: 55%;
   font-size: 0.7rem;
   line-height: 40rpx;
   height: 40rpx;
