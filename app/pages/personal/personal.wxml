@@ -12,7 +12,7 @@
   <view class="explain-text">我的快递</view>
 </view>
 <view class="myexpress">
-  <view class="item-express" wx:for="{{expressList}}" data-order="{{item.order}}">
+  <view class="item-express" wx:for="{{expressList}}" data-order="{{item.order}}" data-name="{{item.name}}" data-code="{{item.code}}" bindtap="showDetail">
     <view class="logo">
         <image src="../../images/express_icon.png"></image>
     </view>

@@ -116,6 +116,7 @@ Page({
       success: function (res) {
         let LogisticCode = eorder;
         let ShipperName = "圆通";
+        let ShipperCode = "YTO";
 
         try {
           let historySearchList = wx.getStorageSync('historySearchList');
@@ -129,7 +130,8 @@ Page({
 
           newList.push({
             "order": LogisticCode,
-            "name": ShipperName
+            "name": ShipperName,
+            "code": ShipperCode,
           })
 
           wx.setStorage({
@@ -137,7 +139,7 @@ Page({
             data: newList,
             success: function () {
               wx.navigateTo({
-                url: '../detail/detail?LogisticCode='+LogisticCode+'&ShipperCode=YTO&ShipperName='+ShipperName
+                url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=YTO&ShipperName=' + ShipperName
               })
             }
           })

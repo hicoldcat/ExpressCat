@@ -34,6 +34,7 @@ Page({
               let resobj = res.data;
               resobj.order = list[i].order;
               resobj.name = list[i].name;
+              resobj.code = list[i].code;
               let l = self.data.expressList.slice(0);
               l.push(resobj);
               self.setData({
@@ -46,5 +47,13 @@ Page({
     } catch (e) {
       console.warn(e)
     }
+  },
+
+  showDetail: function (event) {
+    console.log(event.currentTarget.dataset)
+
+    wx.navigateTo({
+      url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode='+event.currentTarget.dataset.code+'&ShipperName=' + event.currentTarget.dataset.name
+    })
   }
 })
