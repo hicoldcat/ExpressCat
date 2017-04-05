@@ -148,5 +148,12 @@ Page({
         }
       }
     })
+  },
+
+  showDetail:function(event){
+    console.info(event)
+     wx.navigateTo({
+      url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode=' + event.currentTarget.dataset.code + '&ShipperName=' + event.currentTarget.dataset.name
+    })
   }
 })

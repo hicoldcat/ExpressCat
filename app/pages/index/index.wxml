@@ -1,3 +1,4 @@
+
 <!--index.wxml-->
 <view class="box">
   <view class="search-box">
@@ -6,7 +7,7 @@
     </view>
     <form bindsubmit="formSubmit">
       <view class="search-input">
-        <input  focus="{{focus}}" placeholder="请输入快递单号" placeholder-class="placeholderstyle" cursor-spacing="50px" name="expressorder" type="number"/>
+        <input focus="{{focus}}" placeholder="请输入快递单号" placeholder-class="placeholderstyle" cursor-spacing="50px" name="expressorder" type="number" />
         <image src="../../images/scanning.png" bindtap="scanCode"></image>
       </view>
       <view class="search-button">
@@ -19,12 +20,12 @@
     <view class="explain-text">查询历史</view>
   </view>
   <view class="search-result">
-    <view class="history-item" wx:for="{{historySearch}}" >
-      <view class="history-detail">
+    <view class="history-item" wx:for="{{historySearch}}">
+      <view class="history-detail" bindtap="showDetail" data-order="{{item.order}}" data-name="{{item.name}}" data-code="{{item.code}}">
         <view class="expressname">{{item.name}}</view>
         <view class="expressorder">{{item.order}}</view>
       </view>
-      <view class="delhistory"  data-order="{{item.order}}" bindtap="deleteHistory">
+      <view class="delhistory" data-order="{{item.order}}" bindtap="deleteHistory">
         <image src="../../images/delete.png"></image>
       </view>
     </view>

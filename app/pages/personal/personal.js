@@ -50,10 +50,8 @@ Page({
   },
 
   showDetail: function (event) {
-    console.log(event.currentTarget.dataset)
-
     wx.navigateTo({
-      url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode='+event.currentTarget.dataset.code+'&ShipperName=' + event.currentTarget.dataset.name
+      url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode=' + event.currentTarget.dataset.code + '&ShipperName=' + event.currentTarget.dataset.name
     })
   }
 })
