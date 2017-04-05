@@ -4,14 +4,20 @@ Page({
     data: {
         detailList: {},
         expressName: "",
-        expressOrder: ""
+        expressOrder: "",
+        expressCode: ""
     },
     onLoad: function (options) {
+        wx.showLoading({
+            title: '加载中',
+        })
+
         let data = options;
         this.getExpressDetail(data);
         this.setData({
             expressName: data.ShipperName,
-            expressOrder: data.LogisticCode
+            expressOrder: data.LogisticCode,
+            expressCode: data.ShipperCode
         });
 
         wx.setNavigationBarTitle({
@@ -42,6 +48,7 @@ Page({
                 'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
             },
             success: function (res) {
+                wx.hideLoading()
                 let d = {
                     "EBusinessID": "1282662",
                     "ShipperCode": "YTO",
@@ -97,5 +104,24 @@ Page({
             }
         })
 
+    },
+
+    onPullDownRefresh: function () {
+        let self = this;
+        let data = {
+            ShipperName: self.data.expressName,
+            LogisticCode: self.data.expressOrder,
+            ShipperCode: self.data.expressCode
+        }
+        this.getExpressDetail(data)
+        wx.showLoading({
+            title: "正在加载中"
+        })
+    },
+
+    onShow: function () {
+        setTimeout(function () {
+            wx.hideLoading()
+        }, 100);
     }
 })

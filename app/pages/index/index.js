@@ -8,7 +8,17 @@ Page({
     historySearch: []
   },
 
+  onLoad: function () {
+    wx.showLoading({
+      title: '加载中',
+    });
+
+  },
+
   onShow: function () {
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 100);
     this.showHistory();
   },
 
@@ -150,9 +160,8 @@ Page({
     })
   },
 
-  showDetail:function(event){
-    console.info(event)
-     wx.navigateTo({
+  showDetail: function (event) {
+    wx.navigateTo({
       url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode=' + event.currentTarget.dataset.code + '&ShipperName=' + event.currentTarget.dataset.name
     })
   }

@@ -7,6 +7,10 @@ Page({
   },
 
   onLoad: function () {
+    wx.showLoading({
+      title: '加载中',
+    })
+
     var that = this
     app.getUserInfo(function (userInfo) {
       that.setData({
@@ -16,6 +20,9 @@ Page({
   },
 
   onShow: function () {
+    setTimeout(function () {
+      wx.hideLoading()
+    }, 100);
     this.setData({
       expressList: []
     })
@@ -53,5 +60,6 @@ Page({
     wx.navigateTo({
       url: '../detail/detail?LogisticCode=' + event.currentTarget.dataset.order + '&ShipperCode=' + event.currentTarget.dataset.code + '&ShipperName=' + event.currentTarget.dataset.name
     })
-  }
+  },
+
 })
