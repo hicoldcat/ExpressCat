@@ -1,6 +1,7 @@
 var Base64 = require('../../utils/base64.js').Base64;
 var MD5 = require('../../utils/md5.min.js');
 var util = require('../../utils/util.js');
+var MockData = require('../../utils/mockdata.js');
 Page({
   data: {
     result: {},
@@ -104,29 +105,17 @@ Page({
 
   searchExpress: function (eorder) {
     let self = this;
-    let appKey = "518a73d8-1f7f-441a-b644-33e77b49d846";
-    let requestData = "{\"LogisticCode\":\"" + eorder + "\"}";
-    let eBusinessID = "1237100";
-    let requestType = "2002";
-    let dataSign = Base64.encode(MD5(requestData + appKey));
 
-    wx.request({
-      url: 'http://testapi.kdniao.cc:8081/Ebusiness/EbusinessOrderHandle.aspx',
-      data: {
-        RequestData: requestData,
-        EBusinessID: eBusinessID,
-        RequestType: requestType,
-        DataSign: dataSign,
-        DataType: "2"
-      },
-      method: 'POST',
-      header: {
-        'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-      },
-      success: function (res) {
-        let LogisticCode = eorder;
-        let ShipperName = "圆通";
-        let ShipperCode = "YTO";
+    if (MockData.env == "mock") {       //mock环境下使用假数据
+      let res = MockData.getExpressName(eorder);
+      let resData = res.data;
+      let LogisticCode = resData.LogisticCode;
+      let ShipperName = "";
+      let ShipperCode = "";
+
+      if (resData.Shippers.length == 1) {
+        ShipperName = resData.Shippers[0].ShipperName;
+        ShipperCode = resData.Shippers[0].ShipperCode;
 
         try {
           let historySearchList = wx.getStorageSync('historySearchList');
@@ -149,15 +138,214 @@ Page({
             data: newList,
             success: function () {
               wx.navigateTo({
-                url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=YTO&ShipperName=' + ShipperName
+                url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=' + ShipperCode + '&ShipperName=' + ShipperName
               })
             }
           })
         } catch (e) {
           console.log(e);
         }
+
+
+      } else {
+
+        let list = [];
+        if (resData.Shippers.length >= 1 && resData.Shippers.length <= 6) {
+          for (let i = 0; i < resData.Shippers.length; i++) {
+            list.push(resData.Shippers[i].ShipperName)
+          }
+
+        } else if (resData.Shippers.length > 6) {
+          for (let i = 0; i < 6; i++) {
+            list.push(resData.Shippers[i].ShipperName)
+          }
+
+        } else {
+          wx.showModal({
+            title: '提示',
+            content: '暂时没有查到该单号',
+            success: function (res) {
+            }
+          })
+        }
+
+        wx.showActionSheet({
+          itemList: list,
+          success: function (res) {
+            ShipperName = resData.Shippers[res.tapIndex].ShipperName;
+            ShipperCode = resData.Shippers[res.tapIndex].ShipperCode;
+
+            try {
+              let historySearchList = wx.getStorageSync('historySearchList');
+              if (!historySearchList) {
+                historySearchList = [];
+              };
+
+              let newList = historySearchList.filter(function (val) {
+                return (val.order != LogisticCode);
+              });
+
+              newList.push({
+                "order": LogisticCode,
+                "name": ShipperName,
+                "code": ShipperCode,
+              })
+
+              wx.setStorage({
+                key: "historySearchList",
+                data: newList,
+                success: function () {
+                  wx.navigateTo({
+                    url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=' + ShipperCode + '&ShipperName=' + ShipperName
+                  })
+                }
+              })
+            } catch (e) {
+              console.log(e);
+            }
+
+          },
+          fail: function (res) {
+            console.log(res.errMsg)
+          }
+        })
+
       }
-    })
+
+    } else {    //正式环境下请求数据
+
+      let appKey = "";//更换成你申请的appkey
+      let requestData = "{\"LogisticCode\":\"" + eorder + "\"}";
+      let eBusinessID = "";//更换成你申请的商户id
+      let requestType = "2002";
+      let dataSign = Base64.encode(MD5(requestData + appKey));
+
+      wx.request({
+        url: 'http://api.kdniao.cc/Ebusiness/EbusinessOrderHandle.aspx',
+        data: {
+          RequestData: requestData,
+          EBusinessID: eBusinessID,
+          RequestType: requestType,
+          DataSign: dataSign,
+          DataType: "2"
+        },
+        method: 'POST',
+        header: {
+          'content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+        },
+        success: function (res) {
+          let resData = res.data;
+          console.info(resData);
+          let LogisticCode = resData.LogisticCode;
+          let ShipperName = "";
+          let ShipperCode = "";
+
+          if (resData.Shippers.length == 1) {
+            ShipperName = resData.Shippers[0].ShipperName;
+            ShipperCode = resData.Shippers[0].ShipperCode;
+
+            try {
+              let historySearchList = wx.getStorageSync('historySearchList');
+              if (!historySearchList) {
+                historySearchList = [];
+              };
+
+              let newList = historySearchList.filter(function (val) {
+                return (val.order != LogisticCode);
+              });
+
+              newList.push({
+                "order": LogisticCode,
+                "name": ShipperName,
+                "code": ShipperCode,
+              })
+
+              wx.setStorage({
+                key: "historySearchList",
+                data: newList,
+                success: function () {
+                  wx.navigateTo({
+                    url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=' + ShipperCode + '&ShipperName=' + ShipperName
+                  })
+                }
+              })
+            } catch (e) {
+              console.log(e);
+            }
+
+          } else {
+
+            let list = [];
+            if (resData.Shippers.length >= 1 && resData.Shippers.length <= 6) {
+              for (let i = 0; i < resData.Shippers.length; i++) {
+                list.push(resData.Shippers[i].ShipperName)
+              }
+
+            } else if (resData.Shippers.length > 6) {
+              for (let i = 0; i < 6; i++) {
+                list.push(resData.Shippers[i].ShipperName)
+              }
+
+            } else {
+              wx.showModal({
+                title: '提示',
+                content: '暂时没有查到该单号',
+                success: function (res) {
+                }
+              })
+            }
+
+            wx.showActionSheet({
+              itemList: list,
+              success: function (res) {
+                ShipperName = resData.Shippers[res.tapIndex].ShipperName;
+                ShipperCode = resData.Shippers[res.tapIndex].ShipperCode;
+
+                try {
+                  let historySearchList = wx.getStorageSync('historySearchList');
+                  if (!historySearchList) {
+                    historySearchList = [];
+                  };
+
+                  let newList = historySearchList.filter(function (val) {
+                    return (val.order != LogisticCode);
+                  });
+
+                  newList.push({
+                    "order": LogisticCode,
+                    "name": ShipperName,
+                    "code": ShipperCode,
+                  })
+
+                  wx.setStorage({
+                    key: "historySearchList",
+                    data: newList,
+                    success: function () {
+                      wx.navigateTo({
+                        url: '../detail/detail?LogisticCode=' + LogisticCode + '&ShipperCode=' + ShipperCode + '&ShipperName=' + ShipperName
+                      })
+                    }
+                  })
+                } catch (e) {
+                  console.log(e);
+                }
+
+              },
+              fail: function (res) {
+                console.log(res.errMsg)
+              }
+            })
+
+          }
+        }
+      })
+
+    }
+
+
+
+
+
   },
 
   showDetail: function (event) {

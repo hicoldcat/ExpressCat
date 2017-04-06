@@ -1,6 +1,8 @@
 <view class="box">
   <view class="header">
-    <view class="logo">{{detailList.ShipperCode}}</view>
+    <view class="logo">
+      <image src="{{detailList.LogoSrc}}"></image>
+    </view>
     <view class="content">
       <view class="title">
         <view class="name">{{expressName}}</view>
