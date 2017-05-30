@@ -24,9 +24,6 @@ ExpressCat -【快递喵】
         项目路径一定要到app这一层。
 3. 打开项目即可阅读和编辑代码。
 
->### 小程序二维码
-
-![QRCode](https://raw.githubusercontent.com/hicoldcat/ExpressCat/master/assest/gh_e9e6a84e8c88_258.jpg)
 
 >### 开发文档 
 
