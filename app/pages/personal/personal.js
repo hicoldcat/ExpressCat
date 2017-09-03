@@ -1,4 +1,5 @@
 var app = getApp()
+var Util = require('../../utils/util.js');
 Page({
   data: {
     motto: '欢迎使用快递喵！',
@@ -42,6 +43,7 @@ Page({
               resobj.order = list[i].order;
               resobj.name = list[i].name;
               resobj.code = list[i].code;
+              resobj.logosrc = Util.mapLogo(list[i].code);
               let l = self.data.expressList.slice(0);
               l.push(resobj);
               self.setData({

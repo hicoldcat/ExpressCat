@@ -9,11 +9,19 @@ ExpressCat -【快递喵】
 
 鉴于小程序3月27号面向个人开发者开放了申请，于是决定撸一个查快递的微信小程序发布到个人公众号上去，感受一下小程序的使用体验。
 
+项目中数据均为自己模拟的，如果希望和生产环境保持一致，可以将代码中的appKey和eBusinessID更换成自己申请的ID。
+
+本项目中的数据源由快递鸟提供。
+
 感谢[http://www.kdniao.com](http://www.kdniao.com)提供的免费API。
 
 >### 项目地址
 
 [快递喵DEMO](https://github.com/hicoldcat/ExpressCat)
+
+>### 项目进展
+
+	【√】2017-4-6 基本完成项目代码
 
 >### 查看项目代码
 

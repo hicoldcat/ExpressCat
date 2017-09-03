@@ -12,26 +12,25 @@ view{
     background-color: #EF6262;
     justify-content: center;
     align-items: center;
-    padding: 10%;
+    padding: 5%;
     position: relative;
 }
 
 .logo {
     flex: 0 0 54px;
-    border: 2px solid #fff;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 55px;
+    height: 55px;
     text-align: center;
     line-height: 50px;
     font-style: oblique;
     font-weight: 700;
-    background-color: #EF6262;
 }
 
 .logo image {
-    width:50px;
-    height: 50px;
+    width:55px;
+    height: 55px;
+    border-radius: 50%;
+    border: 2px solid #fff;
 }
 
 .content{
@@ -55,6 +54,9 @@ view{
     display: inline-block;
     font-size: .8rem;
     margin-left: 10px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .status{
